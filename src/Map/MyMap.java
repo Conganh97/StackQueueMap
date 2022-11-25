@@ -4,74 +4,74 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MyMap<K, V> {
-    private Node<K, V> head;
-    private Node<K, V> rear;
+    private NodeMap<K, V> head;
+    private NodeMap<K, V> rear;
     private int numberOfElements = 0;
 
 
-    private Node<K, V> put(K key, V value) {
-        Node<K, V> nodeContains = containsKey(key);
+    public NodeMap<K, V> put(K key, V value) {
+        NodeMap<K, V> nodeMapContains = containsKey(key);
         if (isEmpty()) {
-            head = new Node<>(key, value, null);
+            head = new NodeMap<>(key, value, null);
             rear = head;
             return head;
-        } else if (nodeContains != null) {
+        } else if (nodeMapContains != null) {
             containsKey(key).setValue(value);
-            return nodeContains;
+            return nodeMapContains;
         } else {
-            Node<K, V> newNode = new Node<>(key, value, null);
-            newNode.setPrevious(rear);
-            rear.setNext(newNode);
-            rear = newNode;
+            NodeMap<K, V> newNodeMap = new NodeMap<>(key, value, null);
+            newNodeMap.setPrevious(rear);
+            rear.setNext(newNodeMap);
+            rear = newNodeMap;
             return rear;
         }
     }
 
-    public Node<K, V> remove(K key) {
-        Node<K, V> nodeContains = containsKey(key);
-        if (nodeContains != null) {
-            nodeContains.getPrevious().setNext(nodeContains.getNext());
-            nodeContains.getNext().setPrevious(nodeContains.getPrevious());
+    public NodeMap<K, V> remove(K key) {
+        NodeMap<K, V> nodeMapContains = containsKey(key);
+        if (nodeMapContains != null) {
+            nodeMapContains.getPrevious().setNext(nodeMapContains.getNext());
+            nodeMapContains.getNext().setPrevious(nodeMapContains.getPrevious());
         }
-        return nodeContains;
+        return nodeMapContains;
     }
 
     public V get(K key) {
-        Node<K, V> nodeContains = containsKey(key);
-        if (nodeContains != null) {
-            return nodeContains.getValue();
+        NodeMap<K, V> nodeMapContains = containsKey(key);
+        if (nodeMapContains != null) {
+            return nodeMapContains.getValue();
         }
         return null;
     }
 
-    public Node<K, V> containsKey(K key) {
+    public NodeMap<K, V> containsKey(K key) {
         if (!isEmpty()) {
             int code = key.hashCode();
             if (head.getId() == code) {
                 return head;
             }
-            Node<K, V> nodeNext = head.getNext();
-            while (nodeNext != null) {
-                if (nodeNext.getId() == code) {
-                    return nodeNext;
+            NodeMap<K, V> nodeMapNext = head.getNext();
+            while (nodeMapNext != null) {
+                if (nodeMapNext.getId() == code) {
+                    return nodeMapNext;
                 }
-                nodeNext = nodeNext.getNext();
+                nodeMapNext = nodeMapNext.getNext();
             }
         }
         return null;
     }
 
-    public Node<K, V> containsValue(V value) {
+    public NodeMap<K, V> containsValue(V value) {
         if (!isEmpty()) {
             if (head.getValue() == value)
                 return head;
         } else {
-            Node<K, V> nodeNext = head.getNext();
-            while (nodeNext != null) {
-                if (nodeNext.getValue() == value) {
-                    return nodeNext;
+            NodeMap<K, V> nodeMapNext = head.getNext();
+            while (nodeMapNext != null) {
+                if (nodeMapNext.getValue() == value) {
+                    return nodeMapNext;
                 }
-                nodeNext = nodeNext.getNext();
+                nodeMapNext = nodeMapNext.getNext();
             }
         }
         return null;
@@ -86,10 +86,10 @@ public class MyMap<K, V> {
         Set<K> keySet = new HashSet<>();
         if (!isEmpty()) {
             keySet.add(head.getKey());
-            Node<K, V> nodeNext = head.getNext();
-            while (nodeNext != null) {
-                keySet.add(nodeNext.getKey());
-                nodeNext = nodeNext.getNext();
+            NodeMap<K, V> nodeMapNext = head.getNext();
+            while (nodeMapNext != null) {
+                keySet.add(nodeMapNext.getKey());
+                nodeMapNext = nodeMapNext.getNext();
             }
         }
         return keySet;
@@ -99,10 +99,10 @@ public class MyMap<K, V> {
         Set<V> value = new HashSet<>();
         if (!isEmpty()) {
             value.add(head.getValue());
-            Node<K, V> nodeNext = head.getNext();
-            while (nodeNext != null) {
-                value.add(nodeNext.getValue());
-                nodeNext = nodeNext.getNext();
+            NodeMap<K, V> nodeMapNext = head.getNext();
+            while (nodeMapNext != null) {
+                value.add(nodeMapNext.getValue());
+                nodeMapNext = nodeMapNext.getNext();
             }
         }
         return value;

@@ -1,25 +1,25 @@
 package Map;
 
-public class Node <K,V> {
+public class NodeMap<K,V> {
     private int id;
     private K key;
     private V value;
-    private Node <K,V> next;
+    private NodeMap<K,V> next;
 
-    private Node <K,V> previous;
+    private NodeMap<K,V> previous;
 
-    public Node( K key, V value, Node<K, V> next) {
+    public NodeMap(K key, V value, NodeMap<K, V> next) {
         this.id = code(key);
         this.key = key;
         this.value = value;
         this.next = next;
     }
 
-    public Node<K, V> getPrevious() {
+    public NodeMap<K, V> getPrevious() {
         return previous;
     }
 
-    public void setPrevious(Node<K, V> previos) {
+    public void setPrevious(NodeMap<K, V> previos) {
         this.previous = previos;
     }
 
@@ -51,11 +51,11 @@ public class Node <K,V> {
         this.value = value;
     }
 
-    public Node<K, V> getNext() {
+    public NodeMap<K, V> getNext() {
         return next;
     }
 
-    public void setNext(Node<K, V> next) {
+    public void setNext(NodeMap<K, V> next) {
         this.next = next;
     }
 }
