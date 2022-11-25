@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+package StackQuere;
 
 public class Node<E> {
     private E value;

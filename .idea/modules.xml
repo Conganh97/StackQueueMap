@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/InerClassChanllenge.iml" filepath="$PROJECT_DIR$/InerClassChanllenge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StackQueueMap.iml" filepath="$PROJECT_DIR$/StackQueueMap.iml" />
     </modules>
   </component>
 </project>

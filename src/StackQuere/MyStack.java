@@ -1,3 +1,5 @@
+package StackQuere;
+
 import java.util.EmptyStackException;
 
 public class MyStack<E> {

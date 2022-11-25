@@ -1,3 +1,5 @@
+package StackQuere;
+
 import java.util.NoSuchElementException;
 
 public class MyQueue<E> {
@@ -45,7 +47,7 @@ public class MyQueue<E> {
         if (isEmpty()) {
            throw new NoSuchElementException();
         } else {
-            Node <E> temp = this.first;
+            Node<E> temp = this.first;
             this.first = this.first.getPrevious();
             this.first.setPrevious(null);
             numberOfElements--;
@@ -65,7 +67,7 @@ public class MyQueue<E> {
         if (isEmpty()) {
             return null;
         } else {
-            Node <E> temp = this.first;
+            Node<E> temp = this.first;
             this.first = this.first.getPrevious();
             this.first.setPrevious(null);
             numberOfElements--;
