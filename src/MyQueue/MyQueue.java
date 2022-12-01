@@ -26,14 +26,20 @@ public class MyQueue<E> {
         } else if (isEmpty()) {
             this.first = new Node<>(element, null);
         } else {
-            Node<E> lastNode = this.first;
-            while (lastNode.getNext() != null) {
-                lastNode = lastNode.getNext();
-            }
-            lastNode.setNext(new Node<>(element, null));
+            Node<E> lastNode = findLastNode();
+            Node<E> newNode = new Node(element, null);
+            lastNode.setNext(newNode);
         }
         numberOfElements++;
         return true;
+    }
+
+    public Node<E> findLastNode() {
+        Node<E> lastNode = this.first;
+        while (lastNode.getNext() != null) {
+            lastNode = lastNode.getNext();
+        }
+        return lastNode;
     }
 
 

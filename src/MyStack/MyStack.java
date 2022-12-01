@@ -18,7 +18,7 @@ public class MyStack<E> {
         } else if (isEmpty()) {
             this.top = new Node<>(null, element);
         } else {
-            Node<E> newElement = new Node<>(top, element);
+            Node<E> newElement = new Node<E>(top, element);
             this.top = newElement;
         }
         numberOfElements++;

@@ -27,35 +27,38 @@ public class MyMap<K, V> {
             return nodeEdit;
         }
         int index = hashCode(key);
-        System.out.println(index);
-        Node<K, V> node = this.table[index];
-        if (node == null) {
+        if (this.table[index] == null) {
             Node<K, V> newNode = new Node(index, key, value, null);
             this.table[index] = newNode;
             numberOfElements++;
             return newNode;
+        } else {
+            Node<K, V> lastNode = findLastNode(index);
+            Node<K, V> newNode = new Node(index, key, value, null);
+            lastNode.setNext(newNode);
+            numberOfElements++;
+            return newNode;
         }
-        while (node.getNext() != null) {
-            node = node.getNext();
+    }
+
+    public Node<K, V> findLastNode(int index) {
+        Node<K, V> lastNode = this.table[index];
+        while (lastNode.getNext() != null) {
+            lastNode = lastNode.getNext();
         }
-        Node<K, V> newNode = new Node(index, key, value, null);
-        node.setNext(newNode);
-        numberOfElements++;
-        return newNode;
+        return lastNode;
     }
 
     public Node<K, V> remove(K key) {
         if (containsKey(key)) {
             int index = hashCode(key);
-            Node<K, V> nodeRemove = this.table[index];
-            if (this.table[index].getNext() == null) {
+            Node<K, V> nodeInFrontOfRemove = this.table[index];
+            if (nodeInFrontOfRemove.getNext() == null) {
                 this.table[index] = null;
-                return nodeRemove;
+                return nodeInFrontOfRemove;
             }
-            while (nodeRemove.getNext().getKey() != key) {
-                nodeRemove = nodeRemove.getNext();
-            }
-            nodeRemove.setNext(nodeRemove.getNext().getNext());
+            while (nodeInFrontOfRemove.getNext().getKey() != key)
+                nodeInFrontOfRemove.setNext(nodeInFrontOfRemove.getNext().getNext());
             numberOfElements--;
         }
         return null;
@@ -113,10 +116,10 @@ public class MyMap<K, V> {
 
     public Node<K, V> getNote(K key) {
         int index = hashCode(key);
-        Node<K, V> node = this.table[index];
-        while (node != null) {
-            if (node.getKey() == key) return node;
-            node = node.getNext();
+        Node<K, V> getNode = this.table[index];
+        while (getNode != null) {
+            if (getNode.getKey() == key) return getNode;
+            getNode = getNode.getNext();
         }
         return null;
     }

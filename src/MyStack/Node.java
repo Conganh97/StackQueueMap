@@ -20,11 +20,6 @@ public class Node<E> {
         this.value = value;
     }
 
-
-
-
-
-
     public Node<E> getPrevious() {
         return previous;
     }
