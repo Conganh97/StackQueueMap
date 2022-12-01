@@ -1,78 +1,71 @@
 package Map;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MyMap<K, V> {
-    private NodeMap<K, V> head;
-    private NodeMap<K, V> rear;
-    private int numberOfElements = 0;
+    public int numberOfElements = 0;
+    public int capacity;
+    public Node<K, V>[] table;
 
+    public MyMap(int capacity) {
+        this.capacity = capacity;
+        this.table = new Node[capacity];
+    }
 
-    public NodeMap<K, V> put(K key, V value) {
-        NodeMap<K, V> nodeMapContains = containsKey(key);
+    public MyMap() {
+        this(16);
+
+    }
+
+    public Node<K, V> put(K key, V value) {
+        Node<K, V> nodeContains = containsKey(key);
         if (isEmpty()) {
-            head = new NodeMap<>(key, value, null);
-            rear = head;
-            return head;
-        } else if (nodeMapContains != null) {
+            return null;
+        } else if (nodeContains != null) {
             containsKey(key).setValue(value);
-            return nodeMapContains;
+            return nodeContains;
         } else {
-            NodeMap<K, V> newNodeMap = new NodeMap<>(key, value, null);
-            newNodeMap.setPrevious(rear);
-            rear.setNext(newNodeMap);
-            rear = newNodeMap;
-            return rear;
+            Node<K, V> newNode = new Node<>(key, value, null, capacity);
+
+            return newNode;
         }
     }
 
-    public NodeMap<K, V> remove(K key) {
-        NodeMap<K, V> nodeMapContains = containsKey(key);
-        if (nodeMapContains != null) {
-            nodeMapContains.getPrevious().setNext(nodeMapContains.getNext());
-            nodeMapContains.getNext().setPrevious(nodeMapContains.getPrevious());
+    public Node<K, V> remove(K key) {
+        Node<K, V> nodeContains = containsKey(key);
+        if (nodeContains != null) {
+
         }
-        return nodeMapContains;
+        return nodeContains;
     }
 
     public V get(K key) {
-        NodeMap<K, V> nodeMapContains = containsKey(key);
-        if (nodeMapContains != null) {
-            return nodeMapContains.getValue();
+        Node<K, V> nodeContains = containsKey(key);
+        if (nodeContains != null) {
+            return nodeContains.getValue();
         }
         return null;
     }
 
-    public NodeMap<K, V> containsKey(K key) {
-        if (!isEmpty()) {
-            int code = key.hashCode();
-            if (head.getId() == code) {
-                return head;
-            }
-            NodeMap<K, V> nodeMapNext = head.getNext();
-            while (nodeMapNext != null) {
-                if (nodeMapNext.getId() == code) {
-                    return nodeMapNext;
-                }
-                nodeMapNext = nodeMapNext.getNext();
-            }
+    public Node<K, V> containsKey(K key) {
+        int index = key.hashCode();
+
+        if (this.table[index] != null) {
+
         }
+
         return null;
     }
 
-    public NodeMap<K, V> containsValue(V value) {
+    public Node<K, V> containsValue(V value) {
         if (!isEmpty()) {
-            if (head.getValue() == value)
-                return head;
+
         } else {
-            NodeMap<K, V> nodeMapNext = head.getNext();
-            while (nodeMapNext != null) {
-                if (nodeMapNext.getValue() == value) {
-                    return nodeMapNext;
-                }
-                nodeMapNext = nodeMapNext.getNext();
-            }
+
+
         }
         return null;
     }
@@ -82,29 +75,31 @@ public class MyMap<K, V> {
         return numberOfElements == 0;
     }
 
-    public Set<K> keySet() {
-        Set<K> keySet = new HashSet<>();
+    public List<K> keySet() {
+        List<K> keyList = new ArrayList<>();
         if (!isEmpty()) {
-            keySet.add(head.getKey());
-            NodeMap<K, V> nodeMapNext = head.getNext();
-            while (nodeMapNext != null) {
-                keySet.add(nodeMapNext.getKey());
-                nodeMapNext = nodeMapNext.getNext();
+            for (Node nodeHead : this.table) {
+                Node nodeNext = nodeHead;
+                while (nodeNext != null) {
+                    keyList.add((K) nodeNext.getKey());
+                    nodeNext.getNext();
+                }
             }
         }
-        return keySet;
+        return keyList;
     }
 
-    public Set<V> value() {
-        Set<V> value = new HashSet<>();
+    public List<V> value() {
+        List<V> valueList = new ArrayList<>();
         if (!isEmpty()) {
-            value.add(head.getValue());
-            NodeMap<K, V> nodeMapNext = head.getNext();
-            while (nodeMapNext != null) {
-                value.add(nodeMapNext.getValue());
-                nodeMapNext = nodeMapNext.getNext();
+            for (Node nodeHead : this.table) {
+               Node nodeNext = nodeHead;
+                while (nodeNext != null) {
+                    valueList.add((V) nodeNext.getValue());
+                    nodeNext.getNext();
+                }
             }
         }
-        return value;
+        return valueList;
     }
 }
