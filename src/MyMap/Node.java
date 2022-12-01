@@ -1,23 +1,16 @@
-package Map;
+package MyMap;
 
 public class Node<K,V> {
     private int hash;
     private K key;
     private V value;
-    private Node<K,V> next;
+    private Node<K, V> next;
 
-
-
-    public Node(K key, V value, Node<K, V> next,int capacity) {
-        this.hash = hashCode(key,capacity);
+    public Node(int hash, K key, V value, Node<K, V> next) {
+        this.hash = hash;
         this.key = key;
         this.value = value;
         this.next = next;
-    }
-
-
-    public int hashCode (K key,int capacity){
-        return key.hashCode() & (capacity-1);
     }
 
     public int getHash() {
@@ -52,3 +45,6 @@ public class Node<K,V> {
         this.next = next;
     }
 }
+
+
+

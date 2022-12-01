@@ -1,4 +1,4 @@
-package Stack;
+package MyStack;
 
 
 import java.util.EmptyStackException;
@@ -17,10 +17,9 @@ public class MyStack<E> {
             throw new NullPointerException();
         } else if (isEmpty()) {
             this.top = new Node<>(null, element);
-
         } else {
             Node<E> newElement = new Node<>(top, element);
-            this.top = newElement ;
+            this.top = newElement;
         }
         numberOfElements++;
         return element;
@@ -31,11 +30,7 @@ public class MyStack<E> {
             throw new EmptyStackException();
         } else {
             E value = top.getValue();
-            if (numberOfElements == 1) {
-                this.top = null;
-            } else {
-                this.top = top.getPrevious();
-            }
+            this.top = top.getPrevious();
             return value;
         }
     }

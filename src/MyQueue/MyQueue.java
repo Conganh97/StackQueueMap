@@ -1,5 +1,5 @@
 
-package Queue;
+package MyQueue;
 
 import java.util.NoSuchElementException;
 

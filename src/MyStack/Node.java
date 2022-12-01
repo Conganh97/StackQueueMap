@@ -1,4 +1,4 @@
-package Stack;
+package MyStack;
 
 public class Node<E> {
     private E value;
