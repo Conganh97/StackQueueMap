@@ -26,9 +26,8 @@ public class MyQueue<E> {
         } else if (isEmpty()) {
             this.first = new Node<>(element, null);
         } else {
-            Node<E> lastNode = findLastNode();
             Node<E> newNode = new Node(element, null);
-            lastNode.setNext(newNode);
+            addNewNodeAtLast(first, newNode);
         }
         numberOfElements++;
         return true;
@@ -40,6 +39,15 @@ public class MyQueue<E> {
             lastNode = lastNode.getNext();
         }
         return lastNode;
+    }
+
+    public Node<E> addNewNodeAtLast(Node nodeRear, Node newNode) {
+        if (nodeRear.getNext() != null) {
+            nodeRear = nodeRear.getNext();
+            addNewNodeAtLast(nodeRear, newNode);
+        }
+        nodeRear.setNext(newNode);
+        return newNode;
     }
 
 
